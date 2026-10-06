@@ -1,7 +1,17 @@
 # Prathosh H — Personal Portfolio
 
-Biomedical Engineering portfolio combining an Orbital-inspired visual hero with project details, hospital training, innovation journey, achievements and contact links.
+Modern Biomedical Engineering portfolio combining a professional resume-style structure with a 3D orbital presentation hero.
 
-Built with HTML, CSS and JavaScript.
+## Stack
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Orbital 3D carousel interaction
 
-Visual foundation adapted from Tooplate 2167 Orbital; retain the template's attribution/license requirements when publishing.
+## Deploy
+Designed for GitHub + Vercel static deployment.
+
+## Before publishing
+Replace `hprathosh1@gmail.com` in `index.html` with the preferred professional email address.
+
+Template inspiration/attribution: Tooplate 2167 Orbital. Preserve required attribution/license terms when publishing or modifying the template.
