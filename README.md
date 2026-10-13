@@ -1,24 +1,18 @@
-# Prathosh H — Personal Portfolio
+# Prathosh H — Biomedical Engineering Portfolio (Gahan-inspired motion edition)
 
-A responsive Biomedical Engineering portfolio inspired by the editorial layout and premium dark styling of the reference website, adapted for Prathosh's Biomedical Engineering, Healthcare AI and MedTech projects.
+Static portfolio for GitHub + Vercel. No build step is required.
 
-## Sections
-- Hero and contact links
-- About and journey timeline
-- Featured projects with interactive detail/gallery modal
-- Building in Public: EYEZEN
-- Hospital training
-- Innovation journey and achievements
-- Skills and contact
+## Motion and visual features
+- Kinetic split-line hero typography with staggered blur-to-sharp reveal
+- Animated ECG-inspired signal trace behind the hero portrait
+- Smooth Lenis scrolling when the CDN is reachable, with native-scroll fallback
+- Reading-progress line, subtle cursor aura on mouse/trackpad, and restrained portrait parallax
+- Scroll reveals, project image zoom, hover states, and animated dashboard metrics
+- Biomedical project case studies, education timeline, hospital training, achievements and resume
+- Responsive layout and `prefers-reduced-motion` support
 
-## Run locally
-Open `index.html` in a browser. For best results, use VS Code Live Server.
-
-## Deploy
-Upload the contents of this folder to the root of the `prathosh-portfolio` GitHub repository. Vercel can deploy the static site with no build command and no output directory setting.
+## Publish
+Extract the ZIP and upload its contents to the root of the existing GitHub repository, replacing matching files. Commit the changes. Vercel should redeploy automatically.
 
 ## Notes
-- Static HTML, CSS and JavaScript; no build step required.
-- Resume and image assets are stored under `assets/`.
-- Original project photos are used where available. Project descriptions are framed as student prototypes/concepts, not clinically validated devices.
-- The layout is an original adaptation, not a copy of the reference site's source code.
+The interaction style is inspired by minimal, editorial portfolio motion; it is not a pixel-for-pixel copy of another designer's site. Google Fonts and the Lenis scroll library use CDNs, so their enhanced styling requires an internet connection. Native scrolling remains available if Lenis does not load.

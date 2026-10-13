@@ -54,3 +54,90 @@ if (!reducedMotion && window.matchMedia('(pointer:fine)').matches) {
     card.addEventListener('pointerleave', () => { card.style.transform = ''; });
   });
 }
+
+
+// Dashboard: count-up metrics and a real local clock.
+const dashboard = document.getElementById('dashboard');
+if (dashboard && 'IntersectionObserver' in window) {
+  const metricObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      dashboard.classList.add('in-view');
+      dashboard.querySelectorAll('.count-up').forEach(el => {
+        if (el.dataset.counted === 'true') return;
+        el.dataset.counted = 'true';
+        const target = Number(el.dataset.count || 0);
+        const duration = 1100;
+        const start = performance.now();
+        const tick = now => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = String(Math.round(target * eased)).padStart(2, '0');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      metricObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
+  metricObserver.observe(dashboard);
+}
+const clockEl = document.getElementById('liveClock');
+const dateEl = document.getElementById('liveDate');
+const updateClock = () => {
+  const now = new Date();
+  if (clockEl) clockEl.textContent = new Intl.DateTimeFormat(undefined, {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
+  if (dateEl) dateEl.textContent = new Intl.DateTimeFormat(undefined, {day:'2-digit',month:'short',year:'numeric'}).format(now).toUpperCase();
+};
+updateClock();
+window.setInterval(updateClock, 1000);
+
+
+// Kinetic interaction layer: reading progress, cursor aura and gentle hero parallax.
+const progressBar = document.getElementById('readingProgress');
+let progressQueued = false;
+const paintProgress = () => {
+  if (!progressBar) return;
+  const root = document.documentElement;
+  const maxScroll = Math.max(1, root.scrollHeight - window.innerHeight);
+  progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, window.scrollY / maxScroll))})`;
+  progressQueued = false;
+};
+window.addEventListener('scroll', () => {
+  if (!progressQueued) { progressQueued = true; requestAnimationFrame(paintProgress); }
+}, { passive: true });
+paintProgress();
+
+const aura = document.getElementById('cursorAura');
+const finePointer = window.matchMedia('(pointer:fine)').matches;
+if (aura && finePointer && !reducedMotion) {
+  let px = window.innerWidth / 2, py = window.innerHeight / 2;
+  let ax = px, ay = py;
+  window.addEventListener('pointermove', e => {
+    px = e.clientX; py = e.clientY;
+    aura.classList.add('is-visible');
+  }, { passive: true });
+  const followCursor = () => {
+    ax += (px - ax) * .19; ay += (py - ay) * .19;
+    aura.style.left = `${ax}px`; aura.style.top = `${ay}px`;
+    requestAnimationFrame(followCursor);
+  };
+  requestAnimationFrame(followCursor);
+  document.querySelectorAll('a,button,.project-card').forEach(el => {
+    el.addEventListener('pointerenter', () => aura.classList.add('is-hover'));
+    el.addEventListener('pointerleave', () => aura.classList.remove('is-hover'));
+  });
+  document.addEventListener('pointerleave', () => aura.classList.remove('is-visible'));
+}
+
+const heroVisual = document.querySelector('.hero-visual');
+const profileFrame = document.querySelector('.profile-frame');
+if (heroVisual && profileFrame && finePointer && !reducedMotion) {
+  heroVisual.addEventListener('pointermove', e => {
+    const r = heroVisual.getBoundingClientRect();
+    const dx = (e.clientX - r.left) / r.width - .5;
+    const dy = (e.clientY - r.top) / r.height - .5;
+    profileFrame.style.transform = `translate3d(${dx * 10}px,${dy * 9}px,0) rotateX(${-dy * 2.4}deg) rotateY(${dx * 3.2}deg)`;
+  });
+  heroVisual.addEventListener('pointerleave', () => { profileFrame.style.transform = ''; });
+}
