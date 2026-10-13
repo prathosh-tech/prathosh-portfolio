@@ -1,18 +1,24 @@
-# Prathosh H — Biomedical Engineering Portfolio (Gahan-inspired motion edition)
+# Prathosh H — Biomedical Engineering Portfolio
 
-Static portfolio for GitHub + Vercel. No build step is required.
+A responsive, static portfolio inspired by the publicly observable visual system and motion language of Hamenath's portfolio: centered hero composition, floating glass navigation, Inter + Outfit typography with a Montenegrin Gothic One display headline, rose-red gradient lighting, glass surfaces, soft reveal transitions, smooth scrolling, in-view counters, animated marquee, and project detail galleries.
 
-## Motion and visual features
-- Kinetic split-line hero typography with staggered blur-to-sharp reveal
-- Animated ECG-inspired signal trace behind the hero portrait
-- Smooth Lenis scrolling when the CDN is reachable, with native-scroll fallback
-- Reading-progress line, subtle cursor aura on mouse/trackpad, and restrained portrait parallax
-- Scroll reveals, project image zoom, hover states, and animated dashboard metrics
-- Biomedical project case studies, education timeline, hospital training, achievements and resume
-- Responsive layout and `prefers-reduced-motion` support
+## Run locally
 
-## Publish
-Extract the ZIP and upload its contents to the root of the existing GitHub repository, replacing matching files. Commit the changes. Vercel should redeploy automatically.
+Open `index.html` in a browser. For a local server, run `python -m http.server 8000` from this folder and visit `http://localhost:8000`.
+
+## Deploy
+
+Upload the contents of this folder to the root of the GitHub repository connected to Vercel. No build command is required; this is a static HTML/CSS/JavaScript site. Keep the `assets`, `css`, and `js` folders beside `index.html`.
+
+## Included content
+
+- About, education, hospital training and journey
+- Skills and interests
+- EYEZEN featured project plus Smart ECG, Glaucoma Wearable, TMJ Pain Reliever and HABOT
+- EYEZEN project journal / roadmap
+- Awards, innovation activities and field notes
+- Resume, GitHub, LinkedIn and email links
 
 ## Notes
-The interaction style is inspired by minimal, editorial portfolio motion; it is not a pixel-for-pixel copy of another designer's site. Google Fonts and the Lenis scroll library use CDNs, so their enhanced styling requires an internet connection. Native scrolling remains available if Lenis does not load.
+
+The animation patterns are implemented in CSS and JavaScript with Lenis for smooth scrolling when the CDN is available. The hero's animated gradient is a CSS recreation of the reference's atmosphere, not a copy of its proprietary WebGL shader. Reduced-motion preferences and mobile navigation are supported. Project descriptions are framed as student prototypes/concepts and do not claim clinical validation.
